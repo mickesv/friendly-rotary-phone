@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: timemain
+  labels:
+    app: timemainapp
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8080
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: timemain
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeapp
+  labels:
+    app: timemain
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timemain
+  template:
+    metadata:
+      labels:
+        app: timemain
+    spec:
+      containers:
+      - name: timeapp
+        image: timething:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: main
+          valueFrom:
+            configMapKeyRef: 
+              name: timemain-config
+              key: main
+---
