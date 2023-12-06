@@ -6,6 +6,8 @@ WORKDIR /app
 COPY . .
 
 # Download dependencies
+RUN go mod init main
+RUN go get github.com/gin-gonic/gin
 RUN go mod download
 
 # Build the Go application
