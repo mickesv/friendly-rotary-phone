@@ -22,5 +22,5 @@ func main() {
 	router.GET("/", hello)
 	router.GET("/time", timenow)
 
-	router.Run("localhost:8080")
+	router.Run(":8080")
 }
