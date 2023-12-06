@@ -33,13 +33,14 @@ spec:
     spec:
       containers:
       - name: timeapp
-        image: timething:latest
+        image: mickesv/timething:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
-        env:
-        - name: main
-          valueFrom:
-            configMapKeyRef: 
-              name: timemain-config
-              key: main
+        # env:
+        # - name: main
+        #   valueFrom:
+        #     configMapKeyRef: 
+        #       name: timemain-config
+        #       key: main
 ---
